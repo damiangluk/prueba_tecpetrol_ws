@@ -1,0 +1,21 @@
+# Dependencias
+/node_modules
+
+# Archivos generados por el sistema
+.DS_Store
+.env
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Archivos de construcción
+/build
+
+# Carpetas de cobertura de prueba
+/coverage
+
+# Archivos de configuración local
+/.env.local
+.env.local
