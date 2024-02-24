@@ -36,6 +36,7 @@ module.exports = (sequelize, DataTypes) => {
     }
   },
     {
+      tableName: 'solicitudes_de_certificado',
       timestamps: false,
     });
 

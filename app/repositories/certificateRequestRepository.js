@@ -1,22 +1,25 @@
 const db = require("../models/common");
+const genericRepository = require("./genericRepository");
 const { certificateRequest: CertificateRequest, purchaseOrderDetailsMaterial: PurchaseOrderDetailsMaterial, purchaseOrderMaterial: PurchaseOrderMaterial } = db;
+const { updateGeneric } = genericRepository(CertificateRequest, db)
 
 const getByCertificateNumberAndOrder = async (certificateNumber, purchaseOrder) => {
-console.log(certificateNumber)
   return await CertificateRequest.findOne({
-    /*include: [{
+    include: [{
       model: PurchaseOrderDetailsMaterial,
       include: [{
         model: PurchaseOrderMaterial,
         where: { nota_de_pedido: purchaseOrder },
-        as: 'pruchaseOrder'
+        as: 'pruchaseOrder',
       }],
-      as: 'detail'
-    }],*/
+      as: 'detail',
+      required: true
+    }],
     where: { numero_de_certificado: certificateNumber }
   });
 };
 
 module.exports = {
-  getByCertificateNumberAndOrder
+  getByCertificateNumberAndOrder,
+  update: updateGeneric
 }

@@ -26,7 +26,8 @@ const validateUpdate = addResult([
     .custom(async (certificateNumber, { req }) => {
 
       const certificateRequest = await getByCertificateNumberAndOrder(certificateNumber, req.body.OrdenDeCompra);
-      console.log('certificateRequest', certificateRequest)
+      if (!certificateRequest) throw new Error(`Error: El certificado ${certificateNumber} no se encuentra en el sistema`)
+      req.body.certificateRequest = certificateRequest
     })
 ])
 

@@ -13,6 +13,7 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     {
+      tableName: 'det_ordenes_de_compra_materiales',
       timestamps: false,
     });
 

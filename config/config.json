@@ -1,5 +1,5 @@
 {
-  "development": {
+  "local": {
     "username": "wirtrack",
     "password": "!wirtrack!",
     "database": "wirtrack",
@@ -14,11 +14,26 @@
       "idle": 10000
     }
   },
-  "test": {
+  "testing": {
     "username": "wirtrack",
     "password": "!wirtrack!",
     "database": "wirtrack",
     "host": "181.1.179.5",
+    "port": 1434,
+    "dialect": "mssql",
+    "operatorsAliases": 0,
+    "pool": {
+      "max": 5,
+      "min": 0,
+      "acquire": 30000,
+      "idle": 10000
+    }
+  },
+  "preproduction": {
+    "username": "wirtrack",
+    "password": "!wirtrack!",
+    "database": "wirtrack",
+    "host": "",
     "port": 1434,
     "dialect": "mssql",
     "operatorsAliases": 0,
@@ -33,7 +48,7 @@
     "username": "wirtrack",
     "password": "!wirtrack!",
     "database": "wirtrack",
-    "host": "181.1.179.5",
+    "host": "",
     "port": 1434,
     "dialect": "mssql",
     "operatorsAliases": 0,
