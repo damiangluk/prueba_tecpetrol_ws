@@ -1,9 +1,9 @@
-const db = require("../models/common");
+const db = require("../models");
 const User = db.user;
 
 const getByUsernameAndPassword = async (username, password) => {
   return await User.findOne({
-    where: { 
+    where: {
       nombre_de_usuario: username,
       password: password,
       activo: 1

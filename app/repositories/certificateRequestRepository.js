@@ -1,4 +1,4 @@
-const db = require("../models/common");
+const db = require("../models");
 const genericRepository = require("./genericRepository");
 const { certificateRequest: CertificateRequest, purchaseOrderDetailsMaterial: PurchaseOrderDetailsMaterial, purchaseOrderMaterial: PurchaseOrderMaterial } = db;
 const { updateGeneric } = genericRepository(CertificateRequest, db)

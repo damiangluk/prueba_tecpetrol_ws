@@ -2,17 +2,18 @@ const express = require("express");
 const cors = require("cors");
 const { PORT } = require("./config/config");
 const app = express();
+const { loadConfiguration, configurationHelper } = require('./app/helpers/configurationHelper');
 
 
-require("./app/models/common");
+require("./app/models");
 
-const corsOptions ={
+/*const corsOptions ={
   origin:'http://localhost:3000', 
   credentials:true,
   optionSuccessStatus:200
 }
 
-app.use(cors(corsOptions));
+app.use(cors(corsOptions));*/
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -21,7 +22,14 @@ app.get("/", (req, res) => {
   res.json({ message: "Welcome to tecpetrol web service." });
 });
 
-require('./app/routes/certificationRoutes')(app);
+(async function () {
+  await loadConfiguration();
+
+  // Las routes se inicializan aca para poder utilizar los parametros de configuracion en las validaciones
+  require('./app/routes/certificationRoutes')(app);
+  require('./app/routes/orderRoutes')(app);
+})();
+
 
 // set port, listen for requests
 app.listen(PORT, () => {

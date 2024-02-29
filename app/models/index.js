@@ -1,6 +1,6 @@
 const Sequelize = require("sequelize");
-const dbConfig = require("../../../config/config.json");
-const { NODE_ENV } = require("../../../config/config");
+const dbConfig = require("../../config/config.json");
+const { NODE_ENV } = require("../../config/config");
 
 const env = NODE_ENV;
 const config = dbConfig[env];
@@ -19,11 +19,12 @@ db.sequelize = sequelize;
 
 // --------------------------- models ------------------------------
 
-db.user = require("../user")(sequelize, Sequelize);
-db.webServiceLog = require("../webServiceLog")(sequelize, Sequelize);
-db.certificateRequest = require("../certificateRequest")(sequelize, Sequelize);
-db.purchaseOrderDetailsMaterial = require("../purchaseOrderDetailsMaterial")(sequelize, Sequelize);
-db.purchaseOrderMaterial = require("../purchaseOrderMaterial")(sequelize, Sequelize);
+db.user = require("./user")(sequelize, Sequelize);
+db.webServiceLog = require("./webServiceLog")(sequelize, Sequelize);
+db.certificateRequest = require("./certificateRequest")(sequelize, Sequelize);
+db.purchaseOrderDetailsMaterial = require("./purchaseOrderDetailsMaterial")(sequelize, Sequelize);
+db.purchaseOrderMaterial = require("./purchaseOrderMaterial")(sequelize, Sequelize);
+db.configuration = require("./configuration")(sequelize, Sequelize);
 
 // --------------------------- asociations ------------------------------
 
