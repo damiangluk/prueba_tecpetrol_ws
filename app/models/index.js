@@ -1,5 +1,5 @@
 const Sequelize = require("sequelize");
-const dbConfig = require("../../config/config.json");
+const dbConfig = require("../../config/appSettings.json");
 const { NODE_ENV } = require("../../config/config");
 
 const env = NODE_ENV;

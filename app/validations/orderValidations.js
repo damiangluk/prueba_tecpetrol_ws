@@ -55,6 +55,8 @@ const validateSave = addResult([
   body("OrdenesDeCompra")
     .notEmpty()
     .withMessage("Las ordenes de compra no estan en el formato correcto")
+    .isArray({ min: 1 })
+    .withMessage(`Error: La peticion debe contener al menos 1 orden`)
     .isArray({ max: configurationHelper.TecpetrolWebServiceOrdersMaxQuantity })
     .withMessage(`Error: La peticion excede la cantidad máxima de órdenes a procesar (cantidad máxima: ${configurationHelper.TecpetrolWebServiceOrdersMaxQuantity})`),
   validateUniqueOrdersAndPositions
