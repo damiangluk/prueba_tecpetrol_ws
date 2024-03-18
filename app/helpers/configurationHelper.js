@@ -1,7 +1,7 @@
 const { getConfigurationByName } = require("../services/configurationService");
 
 const params = [
-  { name: 'TecpetrolWebServiceOrdersMaxQuantity', id: "wirtrack.tecpetrol.webserviceordersmaxquantity", default: 1/*50*/ }
+  { name: 'TecpetrolWebServiceOrdersMaxQuantity', id: "wirtrack.tecpetrol.webserviceordersmaxquantity", default: 50 }
 ]
 
 let configurationHelper = {}

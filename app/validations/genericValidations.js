@@ -16,20 +16,6 @@ const validateParamId =
     .isInt()
     .withMessage('El id debe ser un numero')
 
-const validateNameCreate = (alreadyExists) =>
-  body('name')
-    .trim()
-    .notEmpty()
-    .withMessage('Nombre invalido')
-    .custom(async value => { if (await alreadyExists(value)) throw new Error('El nombre ya esta en uso') })
-
-const validateNameUpdate = (alreadyExists) =>
-  body('name')
-    .trim()
-    .notEmpty()
-    .withMessage('Nombre invalido')
-    .custom(async (value, { req }) => { if (await alreadyExists(value, req.params.id)) throw new Error('El nombre ya esta en uso') })
-
 const validatePositiveNumber = (name) =>
   body(name)
     .notEmpty()
@@ -58,19 +44,79 @@ const validateRequiredStringWithLength = (name, min, max) =>
 
 const validateOptionalNotEmptyString = (name) =>
   body(name)
-    .optional()
+    .optional({ values: 'null' })
     .trim()
     .notEmpty()
     .withMessage(`El campo ${name} no puede estar vacio`)
 
+const validateOptionalStringWithLength = (name, min, max) =>
+  body(name)
+    .optional({ values: 'null' })
+    .trim()
+    .isLength({ min, max })
+    .withMessage(`El campo ${name} debe contener entre ${min} y ${max} caracteres`)
+
+const validateOptionalDate = (name) =>
+  body(name)
+    .optional({ values: 'null' })
+    .custom((value) => {
+      if (value === "" || value === null) {
+        // Permitir cadena vacía o nula
+        return true;
+      } else {
+        // Validar formato de fecha ISO 8601
+        if (!value.match(/^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}:\d{2})?$/)) {
+          throw new Error(`El campo ${name} debe ser una fecha válida en formato ISO 8601`);
+        }
+        return true;
+      }
+    });
+
+const validateOptionalDecimal = (name) =>
+  body(name)
+    .optional({ values: 'null' })
+    .isDecimal()
+    .withMessage(`El campo ${name} debe ser un número decimal`);
+    
+const validateRequiredNumber = (name) =>
+  body(name)
+    .notEmpty()
+    .withMessage(`El campo ${name} es obligatorio`)
+    .isNumeric()
+    .withMessage(`El campo ${name} debe ser un numero`)
+
+const validateOptionalNumber = (name) =>
+  body(name)
+    .optional({ values: 'null' })
+    .isNumeric()
+    .withMessage(`El campo ${name} debe ser un numero`)
+
+const validateRequiredDouble = (name) =>
+  body(name)
+    .notEmpty()
+    .withMessage(`El campo ${name} es obligatorio`)
+    .isFloat()
+    .withMessage(`El campo ${name} debe ser numerico`)
+
+const validateOptionalDouble = (name) =>
+  body(name)
+    .optional({ values: 'null' })
+    .isFloat()
+    .withMessage(`El campo ${name} debe ser numerico`)
+
 module.exports = {
   validateParamId,
-  validateNameCreate,
-  validateNameUpdate,
   validateParamIdFunction,
   validatePositiveNumber,
   validateRequiredString,
-  validateOptionalNotEmptyString,
+  validateRequiredStringWithLength,
+  validateRequiredNumber,
+  validateRequiredDouble,
   validateOnlyPositiveNumber,
-  validateRequiredStringWithLength
+  validateOptionalNotEmptyString,
+  validateOptionalStringWithLength,
+  validateOptionalDate,
+  validateOptionalDecimal,
+  validateOptionalNumber,
+  validateOptionalDouble
 }

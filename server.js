@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const { PORT } = require("./config/config");
 const app = express();
-const { loadConfiguration, configurationHelper } = require('./app/helpers/configurationHelper');
+const { loadConfiguration } = require('./app/helpers/configurationHelper');
 
 
 require("./app/models");
